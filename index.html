@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Green Reality</title>
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <style>.map {
+        height: 400px; 
+  width: 80%; 
+  border-radius: 25px;
+  z-index: 1;
+  margin: 60px auto 0;
+  position: relative;
+}
+.container{
+	  height: 100%; 
+  width: 100%; 
+  position:absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 0;
+  background-color: black;
+}
+#particles-js{
+	 width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -10;
+    top: 0;
+    left: 0
+}
+.test{
+	color: white;
+}
+.main-container{
+	height: auto;
+	z-index: 1;
+	color: #09ff00;
+	font-size: 50px; 
+	background-color: #000000;
+	opacity: .45;
+	border-radius: 25px;
+	position: relative;
+	border:1px solid #09ff00;
+	text-align: center;
+	width: 80%;
+	 margin: 60px auto 0;
+}
+.graph-container{
+	position: relative; 
+  z-index: 1; /* The z-index should be higher than Google Maps */
+  width: 60%;
+  margin: 60px auto 0;
+  padding: 10px;
+  background: black;
+  text-align: center;
+  height: auto;
+  border-radius: 25px;
+  border:1px solid #09ff00;
+  /*text-decoration-color: #09ff00;*/
+  font-size: 20px;
+  opacity: .45; /* Set the opacity for a slightly transparent Google Form */ 
+  color: #09ff00;
+}
+.ct-chart .ct-label.ct-vertical,
+.ct-chart .ct-label.ct-horizontal {
+  color: rgba(255, 255, 255, 0.5);
+  width:400px;
+  height: 400px;
+} 
+.ct-chart .ct-grid.ct-vertical,
+.ct-chart .ct-grid.ct-horizontal {
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-dasharray: 2px;
+  shape-rendering: crispEdges;
+}
+
+.ct-chart .ct-series.ct-series-a .ct-line {
+  stroke: #09ff00;
+  stroke-width: 10px;
+  stroke-linecap: round;
+}
+
+.ct-chart .ct-series.ct-series-b .ct-line {
+  stroke: #C7F464;
+  stroke-width: 2px;
+  stroke-dasharray: 5px 2px;
+}
+.info{
+	color:white;
+	font-size: 20px;
+	text-align: center;
+
+}
+.ct-chart .ct-series.ct-series-c .ct-line {
+  stroke: #FF6B6B;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-dasharray: 30px 5px;
+}</style>
+    <script type="text/javascript" src="/particles.min.dfbdb573.js"></script>
+     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <link href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css">
+ 
+
+  </head>
+  <body class="container">
+  	<div id="particles-js"></div>
+  	<div class="main-container"><p>Welcome to <strong>Green Reality</strong></p></div>
+    <div id="map" class="map"></div>
+
+    <div class="info">&nbsp;
+    	Selected Area GVI is :-----> <div id="info"></div>
+
+    </div>
+    <!-- <script src="index.js"></script> -->
+    <div class="graph-container">
+    <div class="ct-chart ct-golden-section"></div></div>
+    <div class="graph-container"><p>VNIT v/s RCOEM  </p><br>
+    	Average GVI for RCOEM -----> 13.7140625 <br>
+    	Average GVI for VNIT ------> 32.29546875
+    </div>
+    <script>var map;
+var src = 'http://thethinkers.in/kml/EarthPointFinal.kml';
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: new google.maps.LatLng(-19.257753, 146.823688),
+    zoom: 2,
+    mapTypeId: 'satellite'
+  });
+  var kmlLayer = new google.maps.KmlLayer(src, {
+    suppressInfoWindows: true,
+    preserveViewport: false,
+    map: map
+  });
+  kmlLayer.addListener('click', function (event) {
+    var content = event.featureData.infoWindowHtml;
+    var testimonial = document.getElementById('info');
+    testimonial.innerHTML = content;
+  });
+}</script>
+    <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBre5B_JtN6ccJmLONLzMENX6k2YZFomPo&callback=initMap">
+    </script>
+   
+  </body>
+    <script>particlesJS.load("particles-js", "data/particlesjs-config.json");
+new Chartist.Line('.ct-chart', {
+  labels: [],
+  series: [[13.60461806, 4.216423611, 6.726527778, 23.70715278, 27.03579861, 4.216423611, 6.726527778, 23.70715278, 12.655, 13.469375, 13.468125, 15.26375], [16.81399306, 20.25079861, 16.71114583, 20.08965278, 20.4903125, 18.01052083, 19.88392361, 15.00979167, 14.99309028, 14.90138889, 20.67118056, 20.94166667, 17.76642361, 14.59635417, 20.70871528, 28.388125, 22.395625, 37.666875, 40.73125]]
+}, {
+  low: 0,
+  showPoint: false,
+  axisY: {
+    scaleMinSpace: 40
+  }
+});</script>
+</html>
